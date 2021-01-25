@@ -1,7 +1,7 @@
 # shoppingcart
 Shopping cart for a furniture store
 
-Check the hosted website in Netllify:
+Check the hosted website in Netlify:
 https://shoppingcartfurniture.netlify.app/
 
 
