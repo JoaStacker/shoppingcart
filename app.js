@@ -188,11 +188,8 @@ class UI {
                 let lowerAmount = event.target;
                 let id = lowerAmount.dataset.id;
                 let tempItem = cart.find(item => item.id === id);
-                tempItem.amount = tempItem.amount - 1;
-                if(tempItem.amount <= 0){
-                    cartContent.removeChild(lowerAmount.parentElement.parentElement);
-                    this.removeItem(id);
-                }else{
+                if(tempItem.amount > 1){
+                    tempItem.amount = tempItem.amount - 1;  
                     Storage.saveCart(cart);
                     this.setCartValues(cart);
                     lowerAmount.previousElementSibling.innerText = tempItem.amount;
