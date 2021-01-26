@@ -144,7 +144,15 @@ class UI {
         this.populateCart(cart);
         cartBtn.addEventListener("click", this.showCart);
         closeCartBtn.addEventListener("click", this.hideCart);
-        cartOverlay.addEventListener('click', this.hideCart);
+        if(window.screen.width > 768){
+            cartDOM.addEventListener("mouseover", ()=>{
+                cartOverlay.removeEventListener('click', this.hideCart);
+            });
+            cartDOM.addEventListener("mouseout", ()=>{
+                cartOverlay.addEventListener('click', this.hideCart);
+            });
+        }   
+        this.minimumCheck();
     }
     populateCart(cart){
         cart.forEach(item => this.addCartItem(item));
@@ -175,6 +183,7 @@ class UI {
                 Storage.saveCart(cart);
                 this.setCartValues(cart);
                 addAmount.nextElementSibling.innerText = tempItem.amount;
+                this.minimumCheck();
             }else if(event.target.classList.contains('fa-chevron-down')){
                 let lowerAmount = event.target;
                 let id = lowerAmount.dataset.id;
@@ -188,6 +197,7 @@ class UI {
                     this.setCartValues(cart);
                     lowerAmount.previousElementSibling.innerText = tempItem.amount;
                 }
+                this.minimumCheck();
             }
         });
     }
@@ -214,6 +224,12 @@ class UI {
     }
     getSingleButton(id){
         return buttonsDOM.find(button => button.dataset.id === id)
+    }
+    minimumCheck(){
+        if(cartContent.hasChildNodes()){
+            const arrow = cartContent.querySelectorAll(".fa-chevron-down"); 
+            cart.forEach((item, i) => item.amount === 1 ? arrow[i].classList.add("min") : arrow[i].classList.remove("min"));
+        }
     }
 }
 
