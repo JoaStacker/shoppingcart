@@ -258,6 +258,9 @@ body {
   color: var(--primaryColor);
   cursor: pointer;
 }
+.min{
+  color: #f09e514f;
+}
 /* ---------- End of Cart Item --------------------  */
 
 .cart-footer {
